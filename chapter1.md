@@ -3,6 +3,9 @@ title: "What is OMOP?"
 teaching: 0
 exercises: 0
 ---
+
+
+
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is OMOP?
@@ -195,6 +198,32 @@ By creating tables that also have the name of the concepts answer the following 
 3. What was the ethnicity of the patient not affected by this fever?
 4. Give a description of the patient who received Amoxicillin because they were wheezing?
 
+:::::::::::::::::::::::: hint 
+
+``` r
+person_named <- person |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(person): could not find function "omop_join_name_all"
+```
+
+``` r
+condition_occurrence_named <- condition_occurrence |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(condition_occurrence): could not find function "omop_join_name_all"
+```
+
+``` r
+drug_exposure_named <- person |> omop_join_name_all()
+```
+
+``` error
+Error in omop_join_name_all(person): could not find function "omop_join_name_all"
+```
+::::::::::::::::::::::::::::::::
 
 
  
@@ -281,34 +310,16 @@ The CDMConnector package allows connection to an OMOP Common Data Model in a dat
 
 ``` r
 install.packages("CDMConnector")
-```
-
-``` output
-The following package(s) will be installed:
-- CDMConnector [2.1.0]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing CDMConnector ...                   OK [linked from cache]
-Successfully installed 1 package in 4.7 milliseconds.
-```
-
-``` r
 install.packages("duckdb")
-```
-
-``` output
-The following package(s) will be installed:
-- duckdb [1.3.2]
-These packages will be installed into "~/work/omop-carpentries/omop-carpentries/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu".
-
-# Installing packages --------------------------------------------------------
-- Installing duckdb ...                         OK [linked from cache]
-Successfully installed 1 package in 5.2 milliseconds.
-```
-
-``` r
+[]
 library(CDMConnector)
+```
+
+``` error
+Error in parse(text = input): <text>:3:1: unexpected '['
+2: install.packages("duckdb")
+3: [
+   ^
 ```
 
 A set of synthetic example data is called Eunomia and one example called GiBleed contains 2,600 patients representing a gastrointestinal bleeding study
@@ -363,7 +374,7 @@ cdm$person
 
 ``` output
 # Source:   table<person> [?? x 18]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
+# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpQck66L/filef5b2fc7ddf2.duckdb]
    person_id gender_concept_id year_of_birth month_of_birth day_of_birth
        <int>             <int>         <int>          <int>        <int>
  1         6              8532          1963             12           31
@@ -391,7 +402,7 @@ cdm$condition_occurrence
 
 ``` output
 # Source:   table<condition_occurrence> [?? x 16]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmphTChxO/file248830b376bf.duckdb]
+# Database: DuckDB v1.3.1 [unknown@Linux 6.8.0-1030-azure:R 4.5.1//tmp/RtmpQck66L/filef5b2fc7ddf2.duckdb]
    condition_occurrence_id person_id condition_concept_id condition_start_date
                      <int>     <int>                <int> <date>              
  1                    4483       263              4112343 2015-10-02          
